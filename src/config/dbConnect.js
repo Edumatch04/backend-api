@@ -3,7 +3,6 @@ import { Sequelize } from "sequelize";
 
 dotenv.config();
 
-// Conexão com o banco principal (escolas)
 export const sequelizeEscolas = new Sequelize(
   process.env.DB_NAME_ESCOLAS,
   process.env.DB_USER,
@@ -20,9 +19,8 @@ export const sequelizeEscolas = new Sequelize(
   }
 );
 
-// Conexão com o banco adventista_tucuruvi
 export const sequelizeAdventistaTucuruvi = new Sequelize(
-  process.env.DB_ADVENTISTA_TUCURUVI,
+  process.env.DB_NAME_ADVENTISTA_TUCURUVI,
   process.env.DB_USER,
   process.env.DB_PASSWORD,
   {
@@ -37,7 +35,6 @@ export const sequelizeAdventistaTucuruvi = new Sequelize(
   }
 );
 
-// Testando conexão
 (async () => {
   try {
     await sequelizeEscolas.authenticate();

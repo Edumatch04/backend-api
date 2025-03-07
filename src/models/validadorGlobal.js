@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelizeEscolas } from "../config/dbConnect.js"; // Importa o Sequelize já configurado
+import { sequelizeEscolas } from "../config/dbConnect.js"; 
 
 const Escola = sequelizeEscolas.define("Escola", {
   id: {
@@ -9,7 +9,7 @@ const Escola = sequelizeEscolas.define("Escola", {
   },
   nome: {
     type: DataTypes.STRING,
-    allowNull: false, // Impede valores NULL
+    allowNull: false, 
     validate: {
       notEmpty: {
         msg: "O campo nome não pode estar em branco.",
@@ -27,11 +27,11 @@ const Escola = sequelizeEscolas.define("Escola", {
   },
   telefone: {
     type: DataTypes.STRING,
-    allowNull: true, // Pode ser opcional
+    allowNull: true, 
   },
 }, {
   tableName: "escolas",
-  timestamps: false, // Desativa createdAt e updatedAt, se não forem usados
+  timestamps: false, 
 });
 
 export default Escola;

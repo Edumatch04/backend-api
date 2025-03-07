@@ -7,7 +7,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Testando a conexão com o banco de dados
 sequelizeEscolas.authenticate()
   .then(() => {
     console.log('Conexão com o banco escolas feita com sucesso');
@@ -26,14 +25,8 @@ sequelizeAdventistaTucuruvi.authenticate()
 
 const app = express();
 app.use(express.json());
-
-// Definindo as rotas
 routes(app);
-
-// Middleware para lidar com erros 404
 app.use(manipulador404);
-
-// Middleware para lidar com erros
 app.use(manipuladorDeErros);
 
 export default app;
