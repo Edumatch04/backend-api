@@ -1,13 +1,13 @@
 import express from 'express';
 import EscolasController from '../controllers/escolasController.js';
+import autenticarJWT from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Definição das rotas, chamando os métodos corretos do controller
-router.get('/', EscolasController.listarEscolas);
-router.get('/:id', EscolasController.listarEscolasPorId);
-router.post('/', EscolasController.cadastrarEscola);
-router.put('/:id', EscolasController.atualizarEscola);
-router.delete('/:id', EscolasController.excluirEscola);
+router.get("/", autenticarJWT, EscolasController.listarEscolas);
+router.get("/:id", autenticarJWT, EscolasController.listarEscolasPorId);
+router.post("/", autenticarJWT, EscolasController.cadastrarEscola);
+router.put("/:id", autenticarJWT, EscolasController.atualizarEscola);
+router.delete("/:id", autenticarJWT, EscolasController.excluirEscola);
 
 export default router;

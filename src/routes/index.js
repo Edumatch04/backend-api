@@ -16,7 +16,7 @@ const routes = (app) => {
   app.use("/professores", professoresRoutes);
   app.use("/materias", materiasRoutes);
   app.use("/professor-materia", professorMateriasRoutes);
-  app.use("/auth", authRoutes);
+  app.use(authRoutes);
 
   app.get("/", (req, res) => {
     res.status(200).send({ mensagem: "API funcionando!" });

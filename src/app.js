@@ -3,9 +3,12 @@ import { sequelizeEscolas, sequelizeAdventistaTucuruvi } from "./config/dbConnec
 import manipulador404 from "./middleware/manipulador404.js";
 import routes from "./routes/index.js"
 import manipuladorDeErros from "./middleware/manipuladorDeErros.js";
+import login from "./middleware/authMiddleware.js";
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+console.log("Iniciando o servidor...");
 
 sequelizeEscolas.authenticate()
   .then(() => {
@@ -28,5 +31,6 @@ app.use(express.json());
 routes(app);
 app.use(manipulador404);
 app.use(manipuladorDeErros);
+app.use(login);
 
 export default app;

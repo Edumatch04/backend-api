@@ -9,20 +9,17 @@ class AuthController {
     static login = async (req, res, next) => {
         try {
             const { email_admin, senha } = req.body;
-            
-            // Verifica se a escola existe
+
             const escola = await Escola.findOne({ where: { email_admin } });
             if (!escola) {
                 return res.status(401).json({ message: "E-mail ou senha inválidos." });
             }
 
-            // Compara a senha informada com a hash armazenada
             const senhaValida = await bcrypt.compare(senha, escola.senha);
             if (!senhaValida) {
                 return res.status(401).json({ message: "E-mail ou senha inválidos." });
             }
 
-            // Gera um token JWT
             const token = jwt.sign({ id: escola.id, email: escola.email_admin, tipo: escola.tipo }, secretKey, { expiresIn: "1h" });
 
             res.status(200).json({ message: "Login realizado com sucesso!", token });

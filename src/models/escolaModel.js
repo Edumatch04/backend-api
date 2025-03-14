@@ -56,11 +56,12 @@ const Escola = sequelizeEscolas.define("Escola", {
     },
     data_atualizacao: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+        defaultValue: DataTypes.NOW, 
+        onUpdate: DataTypes.NOW, 
     },
 }, {
     tableName: "cadastro", 
-    timestamps: true 
+    timestamps: false, 
 });
 
 export default Escola;

@@ -5,10 +5,6 @@ dotenv.config();
 
 const secretKey = process.env.JWT_SECRET;
 
-if (!secretKey) {
-    throw new Error("JWT_SECRET não está definido nas variáveis de ambiente.");
-}
-
 const autenticarJWT = (req, res, next) => {
     const authHeader = req.header("Authorization");
 
@@ -19,9 +15,9 @@ const autenticarJWT = (req, res, next) => {
     const token = authHeader.replace("Bearer ", "").trim();
 
     try {
-        const decoded = jwt.verify(token, secretKey);
-        req.usuario = decoded;
-        next();
+        const decoded = jwt.verify(token, secretKey);  
+        req.usuario = decoded;  
+        next();  
     } catch (erro) {
         return res.status(401).json({ message: "Token inválido ou expirado." });
     }
