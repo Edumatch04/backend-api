@@ -30,7 +30,7 @@ class EscolasController {
 
   static cadastrarEscola = async (req, res, next) => {
     try {
-        const { nome, cnpj, endereco, cep, cidade, estado, email_admin, dominio, senha, tipo, status, nivel_ensino } = req.body;
+        const { nome, cnpj, endereco, cep, cidade, estado, email_admin, senha, tipo, status, nivel_ensino } = req.body;
         
         if (!senha) {
           return res.status(400).json({ message: "A senha é obrigatória." });
@@ -44,7 +44,7 @@ class EscolasController {
         const senhaHash = await bcrypt.hash(senha, 10);
 
         const escola = await Escola.create({ 
-            nome, cnpj, endereco, cep, cidade, estado, email_admin, dominio, senha: senhaHash, tipo, status, nivel_ensino
+            nome, cnpj, endereco, cep, cidade, estado, email_admin, senha: senhaHash, tipo, status, nivel_ensino
         });
 
         res.status(201).json(escola);
