@@ -1,6 +1,8 @@
 import Funcionario from "../models/funcionarioModel.js";
+import User from "../models/userModel.js"; 
 import NaoEncontrado from "../erros/NaoEncontrado.js"; 
 import { Op } from 'sequelize';
+import bcrypt from "bcryptjs";
 
 class FuncionariosController {
 
@@ -30,32 +32,61 @@ class FuncionariosController {
 
   static cadastrarFuncionario = async (req, res, next) => {
     try {
-        const { nome, nome_usuario, cargo, email, senha, telefone, data_contratacao } = req.body;
+      const { nome, nome_usuario, cargo, email, senha, telefone, data_contratacao } = req.body;
+  
+      const school_id = req.usuario.school_id;  
+  
+      if (!school_id) {
+        return res.status(403).json({ message: "Usuário sem permissão para cadastrar funcionário." });
+      }
 
-        const funcionarioExistente = await Funcionario.findOne({
-            where: {
-                [Op.or]: [{ email }, { nome_usuario }]
-            }
-        });
-
-        if (funcionarioExistente) {
-            return res.status(400).json({ message: "Email ou nome de usuário já cadastrados." });
+      const funcionarioExistente = await Funcionario.findOne({
+        where: {
+          [Op.or]: [{ email }, { nome_usuario }]
         }
+      });
+  
+      if (funcionarioExistente) {
+        return res.status(400).json({ message: "Email ou nome de usuário já cadastrados." });
+      }
+  
+      const senhaHash = await bcrypt.hash(senha, 10);
+  
+      const funcionario = await Funcionario.create({
+        nome,
+        nome_usuario,
+        cargo,
+        email,
+        senha: senhaHash,  
+        telefone,
+        data_contratacao,
+        school_id  
+      });
 
-        const funcionario = await Funcionario.create({ nome, nome_usuario, cargo, email, senha, telefone, data_contratacao });
-
-        if (cargo === 'Professor') {
-            await Funcionario.sequelize.query(`
-                INSERT INTO professores (funcionario_id) VALUES (${funcionario.id})
-            `);
-        }
-
-        res.status(201).json(funcionario);
+      await User.create({
+        email,
+        nome,
+        password_hash: senhaHash,
+        school_id,
+        role: cargo === 'Professor' ? 'Professor' : 
+              cargo === 'Diretor' ? 'Diretor' : 
+              cargo === 'Vice Diretor' ? 'Vice Diretor' : 
+              cargo === 'Coordenador' ? 'Coordenador' : 
+              cargo === 'Secretário' ? 'Secretário' : 
+              cargo === 'Financeiro' ? 'Financeiro' : 'Professor'  
+      });
+          
+      if (cargo === 'Professor') {
+        await Funcionario.sequelize.query(`
+          INSERT INTO professores (funcionario_id) VALUES (${funcionario.id})
+        `);
+      }
+  
+      res.status(201).json(funcionario);
     } catch (erro) {
-        next(erro);
+      next(erro);
     }
-  };
-
+  };  
 
   static atualizarFuncionario = async (req, res, next) => {
     try {

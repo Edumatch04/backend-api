@@ -1,6 +1,8 @@
 import Aluno from "../models/alunoModel.js";
+import User from "../models/userModel.js"; 
 import NaoEncontrado from "../erros/NaoEncontrado.js"; 
 import { Op } from 'sequelize';
+import bcrypt from "bcryptjs";
 
 class AlunosController {
 
@@ -30,22 +32,51 @@ class AlunosController {
 
   static cadastrarAluno = async (req, res, next) => {
     try {
-      const { nome, ra, tipo, idade, nome_usuario, turma, periodo, genero, email, senha } = req.body;
-      
-      const alunoExistente = await Aluno.findOne({
-        where: {
-          [Op.or]: [{ ra }, { nome_usuario }] 
+        const { nome, ra, tipo, idade, nome_usuario, turma, periodo, genero, email, senha } = req.body;
+
+        const school_id = req.usuario.school_id;  
+
+        if (!school_id) {
+            return res.status(403).json({ message: "Usuário sem permissão para cadastrar aluno." });
         }
-      });
 
-      if (alunoExistente) {
-        return res.status(400).json({ message: "RA ou nome de usuário já cadastrado." });
-      }
+        const alunoExistente = await Aluno.findOne({
+            where: {
+                [Op.or]: [{ ra }, { nome_usuario }]
+            }
+        });
 
-      const aluno = await Aluno.create({ nome, ra, tipo, idade, nome_usuario, turma, periodo, genero, email, senha });
-      res.status(201).json(aluno);
+        if (alunoExistente) {
+            return res.status(400).json({ message: "RA ou nome de usuário já cadastrado." });
+        }
+
+        const senhaHash = await bcrypt.hash(senha, 10);
+
+        const aluno = await Aluno.create({
+            nome,
+            ra,
+            tipo,
+            idade,
+            nome_usuario,
+            turma,
+            periodo,
+            genero,
+            email,
+            senha: senhaHash,
+            school_id 
+        });
+
+        await User.create({
+            email,
+            nome,
+            password_hash: senhaHash,
+            school_id,
+            role: tipo === 'Tutor' ? 'Aluno' : 'Aluno',
+        });
+
+        res.status(201).json(aluno);
     } catch (erro) {
-      next(erro);
+        next(erro);
     }
   };
 

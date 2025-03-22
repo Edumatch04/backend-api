@@ -35,6 +35,10 @@ const Funcionario = sequelizeAdventistaTucuruvi.define("Funcionario", {
     data_contratacao: { 
         type: DataTypes.DATE 
     },
+    school_id: { 
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    }
 }, {
     tableName: "funcionarios", 
     timestamps: false,    

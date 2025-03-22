@@ -13,7 +13,7 @@ const Aluno = sequelizeAdventistaTucuruvi.define("Aluno", {
         unique: true, 
     },
     tipo: {
-        type: DataTypes.ENUM('aluno', 'tutor'),
+        type: DataTypes.ENUM('Aluno', 'Tutor'),
         allowNull: false,
     },
     nome: {
@@ -43,10 +43,19 @@ const Aluno = sequelizeAdventistaTucuruvi.define("Aluno", {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
     },
     senha: {
         type: DataTypes.STRING(255),
         allowNull: false,
+    },
+    school_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: "users", 
+            key: "school_id"
+        }
     }
 }, {
     tableName: "alunos", 

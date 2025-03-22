@@ -1,4 +1,5 @@
 import Escola from "../models/escolaModel.js";
+import User from "../models/userModel.js";
 import NaoEncontrado from "../erros/NaoEncontrado.js"; 
 import bcrypt from "bcryptjs";
 
@@ -47,12 +48,19 @@ class EscolasController {
             nome, cnpj, endereco, cep, cidade, estado, email_admin, senha: senhaHash, tipo, status, nivel_ensino
         });
 
+        await User.create({
+            email: email_admin,
+            nome,
+            password_hash: senhaHash,
+            school_id: escola.id,
+            role: 'Escola'
+        });
+
         res.status(201).json(escola);
     } catch (erro) {
         next(erro);
     }
   };
-
 
   static atualizarEscola = async (req, res, next) => {
     try {

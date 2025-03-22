@@ -1,13 +1,14 @@
 import express from 'express';
 import MateriasController from '../controllers/materiasController.js';
+import autenticarJWT from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 // Definir as rotas para operações de Matérias
-router.get('/', MateriasController.listarMaterias);
-router.get('/:id', MateriasController.listarMateriaPorId);
-router.post('/', MateriasController.cadastrarMateria);
-router.put('/:id', MateriasController.atualizarMateria);
-router.delete('/:id', MateriasController.excluirMateria);
+router.get('/', autenticarJWT, MateriasController.listarMaterias);
+router.get('/:id', autenticarJWT, MateriasController.listarMateriaPorId);
+router.post('/', autenticarJWT, MateriasController.cadastrarMateria);
+router.put('/:id', autenticarJWT, MateriasController.atualizarMateria);
+router.delete('/:id', autenticarJWT, MateriasController.excluirMateria);
 
 export default router;
