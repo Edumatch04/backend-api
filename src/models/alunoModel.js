@@ -49,6 +49,11 @@ const Aluno = sequelizeAdventistaTucuruvi.define("Aluno", {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
+    tempo_total: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
     school_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
