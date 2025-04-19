@@ -36,10 +36,6 @@ const Aluno = sequelizeAdventistaTucuruvi.define("Aluno", {
             key: "id"
         }
     },
-    periodo: {
-        type: DataTypes.ENUM('matutino', 'vespertino', 'noturno'),
-        allowNull: false,
-    },
     genero: {
         type: DataTypes.ENUM('masculino', 'feminino', 'outro'),
         allowNull: false,
