@@ -8,7 +8,13 @@ class AlunosController {
 
   static listarAlunos = async (req, res, next) => {
     try {
-      const alunosResultados = await Aluno.findAll();
+      const alunosResultados = await Aluno.findAll({
+        include: {
+          model: Turma,
+          as: 'turma', 
+          attributes: ['id', 'nome', 'periodo'] 
+        }
+      });
       res.status(200).json(alunosResultados);
     } catch (erro) {
       next(erro);
@@ -18,7 +24,13 @@ class AlunosController {
   static listarAlunosPorId = async (req, res, next) => {
     try {
       const id = req.params.id;
-      const alunoResultado = await Aluno.findByPk(id); 
+      const alunoResultado = await Aluno.findByPk(id, {
+        include: {
+          model: Turma,
+          as: 'turma',
+          attributes: ['id', 'nome', 'periodo']
+        }
+      });
 
       if (alunoResultado) {
         res.status(200).json(alunoResultado);
@@ -32,7 +44,7 @@ class AlunosController {
 
   static cadastrarAluno = async (req, res, next) => {
     try {
-        const { nome, ra, tipo, idade, nome_usuario, turma, periodo, genero, email, senha } = req.body;
+        const { nome, ra, tipo, idade, nome_usuario, turma_id, genero, email, senha } = req.body;
 
         const school_id = req.usuario.school_id;  
 
@@ -58,8 +70,7 @@ class AlunosController {
             tipo,
             idade,
             nome_usuario,
-            turma,
-            periodo,
+            turma_id, 
             genero,
             email,
             senha: senhaHash,

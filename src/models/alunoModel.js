@@ -24,9 +24,13 @@ const Aluno = sequelizeAdventistaTucuruvi.define("Aluno", {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    nome_usuario: {
-        type: DataTypes.STRING(100),
+    turma_id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: "turmas", 
+            key: "id"
+        }
     },
     turma: {
         type: DataTypes.STRING(50),

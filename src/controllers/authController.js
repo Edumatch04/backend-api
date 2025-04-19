@@ -29,7 +29,6 @@ class AuthController {
         return res.status(401).json({ message: "E-mail, nome ou senha inválidos." });
       }
 
-      // Buscar o nome correto da escola a partir do school_id
       const escola = await Escola.findOne({ where: { id: user.school_id } });
       if (!escola) {
         return res.status(500).json({ message: "Escola não encontrada para o usuário." });

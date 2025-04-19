@@ -1,6 +1,7 @@
 import express from "express";
 import escolasRoutes from "./escolaRoutes.js";
 import alunosRoutes from "./alunoRoutes.js";
+import turmasRoutes from "./turmaRoute.js";
 import funcionariosRoutes from "./funcionarioRoute.js";
 import professoresRoutes from "./professorRoute.js";
 import materiasRoutes from "./materiaRoute.js";
@@ -12,6 +13,7 @@ const routes = (app) => {
 
   app.use("/escolas", escolasRoutes);
   app.use("/alunos", alunosRoutes);
+  app.use("/turmas", turmasRoutes);
   app.use("/funcionarios", funcionariosRoutes);
   app.use("/professores", professoresRoutes);
   app.use("/materias", materiasRoutes);

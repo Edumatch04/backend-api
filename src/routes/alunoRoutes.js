@@ -4,7 +4,6 @@ import autenticarJWT from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Definição das rotas, chamando os métodos corretos do controller
 router.get('/', autenticarJWT, AlunosController.listarAlunos);
 router.get('/:id', autenticarJWT, AlunosController.listarAlunosPorId);
 router.post('/', autenticarJWT, AlunosController.cadastrarAluno);
