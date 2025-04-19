@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/sequelize.js"; 
+import { sequelizeAdventistaTucuruvi } from "../config/dbConnect.js";
 
-const Acesso = sequelize.define("Acesso", {
+const Acesso = sequelizeAdventistaTucuruvi.define("Acesso", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
