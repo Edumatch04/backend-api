@@ -1,6 +1,6 @@
 import Aluno from "../models/alunoModel.js";
 import User from "../models/userModel.js"; 
-import Acesso from "../models/acessoModel.js";
+import Acesso from "../models/tempoModel.js";
 import NaoEncontrado from "../erros/NaoEncontrado.js"; 
 import { Op } from 'sequelize';
 import bcrypt from "bcryptjs";

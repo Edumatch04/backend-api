@@ -7,7 +7,7 @@ import Professor from './professorModel.js';
 import Materia from './materiaModel.js';
 import ProfessorMateria from './professorMateriaModel.js'; 
 import User from './userModel.js'; 
-import Acesso from './acessoModel.js';
+import Acesso from './tempoModel.js';
 
 Professor.belongsToMany(Materia, { through: ProfessorMateria, foreignKey: "professor_id" });
 Materia.belongsToMany(Professor, { through: ProfessorMateria, foreignKey: "materia_id" });

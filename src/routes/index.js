@@ -1,6 +1,7 @@
 import express from "express";
 import escolasRoutes from "./escolaRoutes.js";
 import alunosRoutes from "./alunoRoutes.js";
+import tempoRoutes from './tempoRoutes.js';
 import turmasRoutes from "./turmaRoute.js";
 import funcionariosRoutes from "./funcionarioRoute.js";
 import professoresRoutes from "./professorRoute.js";
@@ -18,6 +19,7 @@ const routes = (app) => {
   app.use("/professores", professoresRoutes);
   app.use("/materias", materiasRoutes);
   app.use("/professor-materia", professorMateriasRoutes);
+  app.use('/tempo', tempoRoutes); 
   app.use(authRoutes);
 
   app.get("/", (req, res) => {
