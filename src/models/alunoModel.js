@@ -24,6 +24,10 @@ const Aluno = sequelizeAdventistaTucuruvi.define("Aluno", {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    nome_usuario: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+    },
     turma_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -31,10 +35,6 @@ const Aluno = sequelizeAdventistaTucuruvi.define("Aluno", {
             model: "turmas", 
             key: "id"
         }
-    },
-    turma: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
     },
     periodo: {
         type: DataTypes.ENUM('matutino', 'vespertino', 'noturno'),
