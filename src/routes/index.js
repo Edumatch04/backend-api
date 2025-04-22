@@ -7,6 +7,7 @@ import professoresRoutes from "./professorRoute.js";
 import materiasRoutes from "./materiaRoute.js";
 import professorMateriasRoutes from "./professorMateriaRoute.js";
 import authRoutes from "./authRoutes.js";
+import publicacaoRoutes from "./publicacoesRoutes.js";
 
 const routes = (app) => {
   app.use(express.json());
@@ -18,6 +19,7 @@ const routes = (app) => {
   app.use("/professores", professoresRoutes);
   app.use("/materias", materiasRoutes);
   app.use("/professor-materia", professorMateriasRoutes);
+  app.use("/publicacao", publicacaoRoutes);
   app.use(authRoutes);
 
   app.get("/", (req, res) => {

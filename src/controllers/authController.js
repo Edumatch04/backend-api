@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import User from "../models/userModel.js"; 
+import User from "../models/userModel.js";
 import Escola from "../models/escolaModel.js";
 import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
@@ -52,21 +52,49 @@ class AuthController {
         }
       );
 
-      try {
-        await sequelizeEscola.authenticate();
-        console.log(`Conectado ao banco da escola: ${nomeBanco}`);
-      } catch (error) {
-        return res.status(500).json({ message: "Erro ao conectar ao banco da escola.", error });
+      await sequelizeEscola.authenticate();
+      console.log(`Conectado ao banco da escola: ${nomeBanco}`);
+
+      // Busca o usuário no banco da escola (tabela funcionarios ou alunos)
+      const [result] = await sequelizeEscola.query(
+        `SELECT id, 'funcionarios' as tabela FROM funcionarios WHERE email = ? OR nome_usuario = ?
+         UNION
+         SELECT id, 'alunos' as tabela FROM alunos WHERE email = ? OR nome_usuario = ?`,
+        {
+          replacements: [user.email, user.nome, user.email, user.nome],
+        }
+      );
+
+      if (!result.length) {
+        return res.status(404).json({ message: "Usuário não encontrado no banco da escola." });
       }
 
+      const userEscola = result[0]; // contém id e tabela
+      console.log(`ID encontrado na tabela ${userEscola.tabela}: ${userEscola.id}`);
+
       const token = jwt.sign(
-        { id: user.id, email: user.email, tipo: user.role, banco: nomeBanco, school_id: user.school_id },
+        {
+          id: userEscola.id,
+          tabela: userEscola.tabela,
+          email: user.email,
+          tipo: user.role,
+          banco: nomeBanco,
+          school_id: user.school_id,
+        },
         secretKey,
         { expiresIn: "720h" }
       );
 
-      res.status(200).json({ message: "Login realizado com sucesso!", token, banco: nomeBanco });
+      res.status(200).json({
+        message: "Login realizado com sucesso!",
+        token,
+        banco: nomeBanco,
+        id_escola: userEscola.id,
+        tabela: userEscola.tabela,
+      });
+
     } catch (erro) {
+      console.error(erro);
       next(erro);
     }
   };

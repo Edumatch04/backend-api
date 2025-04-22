@@ -8,6 +8,7 @@ import Materia from './materiaModel.js';
 import ProfessorMateria from './professorMateriaModel.js'; 
 import User from './userModel.js'; 
 import Acesso from './tempoModel.js';
+import Publicacao from "./publicacaoModel.js";
 
 Professor.belongsToMany(Materia, { through: ProfessorMateria, foreignKey: "professor_id" });
 Materia.belongsToMany(Professor, { through: ProfessorMateria, foreignKey: "materia_id" });
@@ -16,4 +17,4 @@ turmas.hasMany(alunos, {foreihnKey: "turma_id", as: "alunos"});
 alunos.hasMany(Acesso, { foreignKey: 'aluno_id', as: 'acessos' });
 Acesso.belongsTo(alunos, { foreignKey: 'aluno_id', as: 'aluno' });
 
-export { escolas, alunos, turmas, funcionario, User, Acesso };
+export { escolas, alunos, turmas, funcionario, User, Acesso, Publicacao };
