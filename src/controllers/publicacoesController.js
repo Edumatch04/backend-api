@@ -5,7 +5,10 @@ class PublicacoesController {
   
   static listarPublicacoes = async (req, res, next) => {
     try {
-      const publicacoes = await Publicacao.findAll();
+      const { tipo } = req.query;
+      const where = tipo ? { tipo } : {};
+  
+      const publicacoes = await Publicacao.findAll({ where });
       res.status(200).json(publicacoes);
     } catch (erro) {
       next(erro);
@@ -29,7 +32,7 @@ class PublicacoesController {
 
   static cadastrarPublicacao = async (req, res, next) => {
     try {
-      const { titulo, conteudo, pdf_url, materia_id } = req.body;
+      const { titulo, conteudo, pdf_url, materia_id, tipo } = req.body;
       const { school_id, id: usuario_id } = req.usuario;
 
       const novaPublicacao = await Publicacao.create({
@@ -38,7 +41,8 @@ class PublicacoesController {
         pdf_url,
         school_id,
         materia_id,
-        usuario_id
+        usuario_id,
+        tipo
       });
 
       res.status(201).json(novaPublicacao);

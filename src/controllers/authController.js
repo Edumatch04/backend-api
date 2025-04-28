@@ -34,6 +34,31 @@ class AuthController {
         return res.status(500).json({ message: "Escola não encontrada para o usuário." });
       }
 
+      if (user.role === "Escola") {
+        const nomeBanco = escola.nome.toLowerCase().replace(/\s+/g, "_");
+      
+        const token = jwt.sign(
+          {
+            id: user.id,
+            tabela: 'users',
+            email: user.email,
+            tipo: user.role,
+            banco: nomeBanco,
+            school_id: user.school_id,
+          },
+          secretKey,
+          { expiresIn: "720h" }
+        );
+      
+        return res.status(200).json({
+          message: "Login de escola realizado com sucesso!",
+          token,
+          banco: nomeBanco,
+          id_escola: user.id,
+          tabela: 'users',
+        });
+      }
+
       const nomeBanco = escola.nome.toLowerCase().replace(/\s+/g, "_");
 
       const sequelizeEscola = new Sequelize(

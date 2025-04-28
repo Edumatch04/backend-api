@@ -35,6 +35,10 @@ const Publicacao = sequelizeAdventistaTucuruvi.define("Publicacao", {
   usuario_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+  },
+  tipo: { 
+    type: DataTypes.ENUM("Desafios", "Trabalhos", "Reforços", "Avisos"),
+    allowNull: false,
   }
 }, {
   tableName: "publicacao",
