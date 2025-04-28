@@ -8,6 +8,8 @@ import materiasRoutes from "./materiaRoute.js";
 import professorMateriasRoutes from "./professorMateriaRoute.js";
 import authRoutes from "./authRoutes.js";
 import publicacaoRoutes from "./publicacoesRoutes.js";
+import respostaRoutes from "./respostaRoute.js";
+import frequencias from "./frequenicaRoutes.js";
 
 const routes = (app) => {
   app.use(express.json());
@@ -20,6 +22,8 @@ const routes = (app) => {
   app.use("/materias", materiasRoutes);
   app.use("/professor-materia", professorMateriasRoutes);
   app.use("/publicacao", publicacaoRoutes);
+  app.use("/respostas", respostaRoutes);
+  app.use("/frequencia", frequencias);
   app.use(authRoutes);
 
   app.get("/", (req, res) => {

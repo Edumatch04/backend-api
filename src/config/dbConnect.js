@@ -10,6 +10,7 @@ export const sequelizeEscolas = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "mysql",
+    timezone: "-03:00", 
     pool: {
       max: 10,
       min: 0,
@@ -26,6 +27,7 @@ export const sequelizeAdventistaTucuruvi = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "mysql",
+    timezone: "-03:00", 
     pool: {
       max: 10,
       min: 0,
