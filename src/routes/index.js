@@ -10,6 +10,10 @@ import authRoutes from "./authRoutes.js";
 import publicacaoRoutes from "./publicacoesRoutes.js";
 import respostaRoutes from "./respostaRoute.js";
 import frequencias from "./frequenicaRoutes.js";
+import trabalhosRoutes from "./trabalhoRoutes.js";
+import desafiosRoutes from "./desafioRoute.js";
+import alternativasRoutes from "./alternativaRoute.js";
+import alternativasDesafiosRoutes from "./alternativaDesafioRoute.js";
 
 const routes = (app) => {
   app.use(express.json());
@@ -24,6 +28,10 @@ const routes = (app) => {
   app.use("/publicacao", publicacaoRoutes);
   app.use("/respostas", respostaRoutes);
   app.use("/frequencia", frequencias);
+  app.use("/trabalhos", trabalhosRoutes);
+  app.use("/desafios", desafiosRoutes);
+  app.use("/alternativas", alternativasRoutes);
+  app.use("/alternativas-desafios", alternativasDesafiosRoutes);
   app.use(authRoutes);
 
   app.get("/", (req, res) => {

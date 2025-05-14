@@ -3,6 +3,7 @@ import Publicacao from "../models/publicacaoModel.js";
 import NaoEncontrado from "../erros/NaoEncontrado.js";
 import ErroUsuario from "../erros/ErroUsuario.js";
 import { registrarAtividade } from "../services/frequenciaService.js";
+import { Op } from "sequelize";
 
 class RespostaController {
 
@@ -28,7 +29,7 @@ class RespostaController {
             });
 
             if (["Desafio", "Trabalho", "Reforço"].includes(publicacao.tipo)) {
-                await registrarAtividade(aluno_id); 
+                await registrarAtividade(aluno_id, publicacao_id, publicacao.tipo);
             }
 
             res.status(201).json(novaResposta);

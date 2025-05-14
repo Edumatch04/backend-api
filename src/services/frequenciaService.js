@@ -28,51 +28,38 @@ export const responderAtividade = async (req, res) => {
     }
 };
 
-// Função para registrar a atividade do aluno (frequência) 
-export async function registrarAtividade(aluno_id) {
+export async function registrarAtividade(aluno_id, publicacao_id, tipo_publicacao) {
     const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0); // Ajusta para o início do dia (00:00:00)
+    hoje.setHours(0, 0, 0, 0); // zera a hora pra comparar só o dia
 
-    const ontem = new Date();
-    ontem.setDate(ontem.getDate() - 1); // Ajusta para o dia anterior
-    ontem.setHours(0, 0, 0, 0); // Ajusta para o início do dia (00:00:00)
-
-    // Verifica se o aluno tem alguma resposta registrada para o dia de hoje
-    const respostaHoje = await Resposta.findOne({
+    const frequenciaExistente = await Frequencia.findOne({
         where: {
-            aluno_id: aluno_id,
-            data_resposta: hoje // Verifica se já existe resposta hoje
-        }
-    });
-
-    if (!respostaHoje) {
-        // Se não houver resposta registrada hoje, não registra a atividade
-        return;
-    }
-
-    // Verifica a frequência de ontem para atualizar a ofensiva
-    const frequenciaOntem = await Frequencia.findOne({
-        where: {
-            aluno_id: aluno_id,
-            ultimo_dia: ontem
-        }
-    });
-
-    let ofensiva = 1;
-    if (frequenciaOntem) {
-        ofensiva = frequenciaOntem.ofensiva + 1; // Incrementa a ofensiva
-    }
-
-    // Registra ou atualiza a frequência para hoje
-    await Frequencia.findOrCreate({
-        where: {
-            aluno_id: aluno_id,
-            ultimo_dia: hoje
+            aluno_id,
+            data_hora: {
+                [Op.gte]: hoje, // Só pega entregas de hoje
+            },
         },
-        defaults: {
-            ofensiva: ofensiva // Define o valor da ofensiva
-        }
     });
+
+    if (!frequenciaExistente) {
+        // Primeira entrega do dia
+        await Frequencia.create({
+            aluno_id,
+            publicacao_id,
+            tipo_publicacao,
+            data_hora: new Date(),
+            ofensiva: 1,
+        });
+    } else {
+        // Já entregou hoje -> só cria novo registro mas sem resetar ofensiva
+        await Frequencia.create({
+            aluno_id,
+            publicacao_id,
+            tipo_publicacao,
+            data_hora: new Date(),
+            ofensiva: frequenciaExistente.ofensiva + 1,
+        });
+    }
 }
 
 // Função para buscar a quantidade de dias consecutivos com atividade (frequência) 
