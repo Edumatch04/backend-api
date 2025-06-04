@@ -41,3 +41,4 @@ Reforco.hasMany(ReforcoAluno, { foreignKey: 'reforco_id', as: 'alunos' });
 ReforcoAluno.belongsTo(Reforco, { foreignKey: 'reforco_id' });
 
 export { escolas, alunos, turmas, funcionario, User, Acesso, Publicacao, Trabalho, Questao, Reforco, ReforcoAluno, ReforcoConteudo, ReforcoMaterial, ReforcoTeste };
+export { escolas, alunos, turmas, funcionario, User, Acesso, Publicacao, Trabalho, Questao };

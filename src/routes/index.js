@@ -34,6 +34,7 @@ const routes = (app) => {
   app.use("/alternativas", alternativasRoutes);
   app.use("/alternativas-desafios", alternativasDesafiosRoutes);
   app.use("/reforcos", reforcoRoutes);
+  app.use(authRoutes);
 
   app.get("/", (req, res) => {
     res.status(200).send({ mensagem: "API funcionando!" });
