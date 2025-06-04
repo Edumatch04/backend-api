@@ -2,11 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelizeAdventistaTucuruvi } from "../config/dbConnect.js";
 
 const Frequencia = sequelizeAdventistaTucuruvi.define("Frequencia", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   aluno_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -15,13 +11,26 @@ const Frequencia = sequelizeAdventistaTucuruvi.define("Frequencia", {
       key: "id",
     },
   },
-  ultimo_dia: {
-    type: DataTypes.DATEONLY,
+  publicacao_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
+    references: {
+      model: "publicacao",
+      key: "id",
+    },
+  },
+  tipo_publicacao: {
+    type: DataTypes.ENUM('Desafio', 'Trabalho', 'Reforço'),
+    allowNull: false,
+  },
+  data_hora: { 
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
   },
   ofensiva: {
     type: DataTypes.INTEGER,
-    defaultValue: 0,
+    defaultValue: 1, 
   },
 }, {
   tableName: "frequencias",

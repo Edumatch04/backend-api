@@ -10,10 +10,15 @@ import authRoutes from "./authRoutes.js";
 import publicacaoRoutes from "./publicacoesRoutes.js";
 import respostaRoutes from "./respostaRoute.js";
 import frequencias from "./frequenicaRoutes.js";
+import trabalhosRoutes from "./trabalhoRoutes.js";
+import desafiosRoutes from "./desafioRoute.js";
+import alternativasRoutes from "./alternativaRoute.js";
+import alternativasDesafiosRoutes from "./alternativaDesafioRoute.js";
+import reforcoRoutes from "./reforcosRoutes.js";
 
 const routes = (app) => {
   app.use(express.json());
-
+  app.use(authRoutes);
   app.use("/escolas", escolasRoutes);
   app.use("/alunos", alunosRoutes);
   app.use("/turmas", turmasRoutes);
@@ -24,7 +29,11 @@ const routes = (app) => {
   app.use("/publicacao", publicacaoRoutes);
   app.use("/respostas", respostaRoutes);
   app.use("/frequencia", frequencias);
-  app.use(authRoutes);
+  app.use("/trabalhos", trabalhosRoutes);
+  app.use("/desafios", desafiosRoutes);
+  app.use("/alternativas", alternativasRoutes);
+  app.use("/alternativas-desafios", alternativasDesafiosRoutes);
+  app.use("/reforcos", reforcoRoutes);
 
   app.get("/", (req, res) => {
     res.status(200).send({ mensagem: "API funcionando!" });
