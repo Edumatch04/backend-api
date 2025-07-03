@@ -1,6 +1,6 @@
-import Funcionario from "../models/funcionarioModel.js";
+import Funcionario from "../../../models/funcionarioModel.js";
 import User from "../models/userModel.js"; 
-import NaoEncontrado from "../erros/NaoEncontrado.js"; 
+import NaoEncontrado from "../../../erros/NaoEncontrado.js"; 
 import { Op } from 'sequelize';
 import bcrypt from "bcryptjs";
 

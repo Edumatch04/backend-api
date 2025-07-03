@@ -1,8 +1,8 @@
-import Resposta from "../models/respostaModels.js";
-import Publicacao from "../models/publicacaoModel.js";
-import NaoEncontrado from "../erros/NaoEncontrado.js";
-import ErroUsuario from "../erros/ErroUsuario.js";
-import { registrarAtividade } from "../services/frequenciaService.js";
+import Resposta from "../../../models/respostaModels.js";
+import Publicacao from "../../../models/publicacaoModel.js";
+import NaoEncontrado from "../../../erros/NaoEncontrado.js";
+import ErroUsuario from "../../../erros/ErroUsuario.js";
+import { registrarAtividade } from "../../../services/frequenciaService.js";
 import { Op } from "sequelize";
 
 class RespostaController {

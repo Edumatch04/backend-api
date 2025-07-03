@@ -1,5 +1,5 @@
 import express from 'express';
-import AlternativasController from '../controllers/alternativasController.js';
+import AlternativasController from '../components/escolas/controller/alternativasController.js';
 import autenticarJWT from "../middleware/authMiddleware.js";
 
 const router = express.Router();

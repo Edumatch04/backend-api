@@ -1,5 +1,5 @@
 import express from 'express';
-import ReforcosController from '../controllers/reforcosController.js';
+import ReforcosController from '../components/escolas/controller/reforcosController.js';
 import autenticarJWT from "../middleware/authMiddleware.js";
 import autenticarProfessor from "../middleware/autenticarProfessor.js";
 
