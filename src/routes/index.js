@@ -15,7 +15,6 @@ import desafiosRoutes from "./desafioRoute.js";
 import alternativasRoutes from "./alternativaRoute.js";
 import alternativasDesafiosRoutes from "./alternativaDesafioRoute.js";
 import reforcoRoutes from "./reforcosRoutes.js";
-import tutoriaRoutes from "./tutoriaRoutes.js";
 
 const routes = (app) => {
   app.use(express.json());
@@ -35,7 +34,6 @@ const routes = (app) => {
   app.use("/alternativas", alternativasRoutes);
   app.use("/alternativas-desafios", alternativasDesafiosRoutes);
   app.use("/reforcos", reforcoRoutes);
-  app.use("/api", tutoriaRoutes);
 
   app.get("/", (req, res) => {
     res.status(200).send({ mensagem: "API funcionando!" });
