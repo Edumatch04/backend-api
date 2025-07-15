@@ -1,5 +1,5 @@
 import express from "express";
-import RespostaController from "../components/escolas/controller/respostasController.js";
+import RespostaController from "../controllers/respostasController.js";
 import autenticarJWT from "../middleware/authMiddleware.js"; 
 import { validarResposta, validarErros } from "../middleware/validacaoRespostaMiddleware.js"; 
 

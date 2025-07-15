@@ -1,5 +1,5 @@
 import express from 'express';
-import TrabalhosController from '../components/escolas/controller/trabalhosController.js';
+import TrabalhosController from '../controllers/trabalhosController.js';
 import autenticarJWT from "../middleware/authMiddleware.js";
 import autenticarProfessor from "../middleware/autenticarProfessor.js"; 
 

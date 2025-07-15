@@ -1,5 +1,5 @@
 import express from 'express';
-import PublicacoesController from '../components/escolas/controller/publicacoesController.js';
+import PublicacoesController from '../controllers/publicacoesController.js';
 import autenticarJWT from "../middleware/authMiddleware.js";
 import validarCamposPublicacao from '../middleware/validacaoPublicacoMiddleware.js';
 

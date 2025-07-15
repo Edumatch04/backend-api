@@ -1,5 +1,5 @@
 import express from 'express';
-import AlunosController from '../components/auth/controller/alunosController.js';
+import AlunosController from '../controllers/alunosController.js';
 import TempoController from '../controllers/tempoController.js';
 import autenticarJWT from "../middleware/authMiddleware.js";
 
