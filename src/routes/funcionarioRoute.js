@@ -1,5 +1,5 @@
 import express from 'express';
-import FuncionariosController from '../components/auth/controller/funcionariosController.js';
+import FuncionariosController from '../controllers/funcionariosController.js';
 import autenticarJWT from "../middleware/authMiddleware.js";
 
 const router = express.Router();

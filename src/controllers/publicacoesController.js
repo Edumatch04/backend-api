@@ -1,5 +1,5 @@
-import Publicacao from "../../../models/publicacaoModel.js";
-import NaoEncontrado from "../../../erros/NaoEncontrado.js";
+import Publicacao from "../models/publicacaoModel.js";
+import NaoEncontrado from "../erros/NaoEncontrado.js";
 
 class PublicacoesController {
   

@@ -1,5 +1,5 @@
-import AlternativaQuestao from "../../../models/alternativaQuestaoModel.js";
-import NaoEncontrado from "../../../erros/NaoEncontrado.js";
+import AlternativaQuestao from "../models/alternativaQuestaoModel.js";
+import NaoEncontrado from "../erros/NaoEncontrado.js";
 
 class AlternativasController {
 
