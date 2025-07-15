@@ -1,5 +1,5 @@
-import AlternativaQuestaoDesafio from "../../../models/alternativaQuestaoDesafioModel.js";
-import NaoEncontrado from "../../../erros/NaoEncontrado.js";
+import AlternativaQuestaoDesafio from "../models/alternativaQuestaoDesafioModel.js";
+import NaoEncontrado from "../erros/NaoEncontrado.js";
 
 class AlternativasDesafiosController {
 
