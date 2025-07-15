@@ -1,6 +1,6 @@
 import Escola from "../models/escolaModel.js";
 import User from "../models/userModel.js";
-import NaoEncontrado from "../erros/NaoEncontrado.js"; 
+import NaoEncontrado from "../../../erros/NaoEncontrado.js"; 
 import bcrypt from "bcryptjs";
 
 class EscolasController {

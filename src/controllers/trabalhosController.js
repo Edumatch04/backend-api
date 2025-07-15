@@ -1,8 +1,8 @@
-import Trabalho from "../models/trabalhoModel.js";
-import QuestaoTrabalho from "../models/questaoTrabalhoModel.js";
-import AlternativaQuestao from "../models/alternativaQuestaoModel.js";
-import TrabalhoTurma from "../models/trabalhoTurmaModel.js";
-import NaoEncontrado from "../erros/NaoEncontrado.js";
+import Trabalho from "../../../models/trabalhoModel.js";
+import QuestaoTrabalho from "../../../models/questaoTrabalhoModel.js";
+import AlternativaQuestao from "../../../models/alternativaQuestaoModel.js";
+import TrabalhoTurma from "../../../models/trabalhoTurmaModel.js";
+import NaoEncontrado from "../../../erros/NaoEncontrado.js";
 
 class TrabalhosController {
 

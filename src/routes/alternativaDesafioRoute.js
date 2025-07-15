@@ -1,5 +1,5 @@
 import express from 'express';
-import AlternativaDesafioController from '../controllers/alternativasDesafiosController.js';
+import AlternativaDesafioController from '../components/escolas/controller/alternativasDesafiosController.js';
 import autenticarJWT from "../middleware/authMiddleware.js";
 
 const router = express.Router();

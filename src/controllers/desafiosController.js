@@ -1,8 +1,8 @@
-import Desafio from "../models/desafioModel.js";
-import QuestaoDesafio from "../models/questaoDesafioModel.js";
-import AlternativaQuestaoDesafio from "../models/alternativaQuestaoDesafioModel.js";
-import DesafioTurma from "../models/desafioTurmaModel.js";
-import NaoEncontrado from "../erros/NaoEncontrado.js";
+import Desafio from "../../../models/desafioModel.js";
+import QuestaoDesafio from "../../../models/questaoDesafioModel.js";
+import AlternativaQuestaoDesafio from "../../../models/alternativaQuestaoDesafioModel.js";
+import DesafioTurma from "../../../models/desafioTurmaModel.js";
+import NaoEncontrado from "../../../erros/NaoEncontrado.js";
 
 class DesafiosController {
 

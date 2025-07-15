@@ -1,9 +1,9 @@
-import Reforco from "../models/reforcoModel.js";
-import ReforcoConteudo from "../models/reforcoConteudoModel.js";
-import ReforcoMaterial from "../models/reforcoMaterialModel.js";
-import ReforcoTeste from "../models/reforcoTesteModel.js";
-import ReforcoAluno from "../models/reforcoAlunoModel.js";
-import NaoEncontrado from "../erros/NaoEncontrado.js";
+import Reforco from "../../../models/reforcoModel.js";
+import ReforcoConteudo from "../../../models/reforcoConteudoModel.js";
+import ReforcoMaterial from "../../../models/reforcoMaterialModel.js";
+import ReforcoTeste from "../../../models/reforcoTesteModel.js";
+import ReforcoAluno from "../../../models/reforcoAlunoModel.js";
+import NaoEncontrado from "../../../erros/NaoEncontrado.js";
 
 class ReforcosController {
     // Criar um novo reforço
